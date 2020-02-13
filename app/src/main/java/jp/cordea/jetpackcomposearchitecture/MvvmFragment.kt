@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.Composable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.VerticalScroller
@@ -30,6 +31,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
     ): View {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         (view as ViewGroup).setContent { View(state) }
+        viewModel.items.observe(viewLifecycleOwner, Observer { state.items = it })
         return view
     }
 
