@@ -1,7 +1,7 @@
 package jp.cordea.jetpackcomposearchitecture
 
+import io.reactivex.Single
 import jp.cordea.jetpackcomposearchitecture.response.Questions
-import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -12,5 +12,5 @@ interface StackExchangeApi {
         @Query("order") order: String,
         @Query("sort") sort: String,
         @Query("tagged") tagged: String
-    ): Flow<Questions>
+    ): Single<Questions>
 }
