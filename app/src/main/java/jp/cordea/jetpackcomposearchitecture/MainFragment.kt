@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.Composable
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.layout.*
@@ -38,9 +39,15 @@ class MainFragment : Fragment(R.layout.empty_fragment) {
                     mainAxisAlignment = MainAxisAlignment.Center
                 ) {
                     inflexible {
-                        MainButton(text = "a")
-                        MainButton(text = "b")
-                        MainButton(text = "c")
+                        MainButton(text = "a") {
+                            findNavController().navigate(
+                                MainFragmentDirections.actionMainFragmentToMvvmFragment()
+                            )
+                        }
+                        MainButton(text = "b") {
+                        }
+                        MainButton(text = "c") {
+                        }
                     }
                 }
             }
@@ -48,12 +55,11 @@ class MainFragment : Fragment(R.layout.empty_fragment) {
     }
 
     @Composable
-    private fun MainButton(text: String) {
+    private fun MainButton(text: String, onClick: () -> Unit) {
         Button(
             text = text,
             modifier = Spacing(bottom = 16.dp),
-            onClick = {
-            }
+            onClick = onClick
         )
     }
 
