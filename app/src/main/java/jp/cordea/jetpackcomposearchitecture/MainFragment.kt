@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
-import androidx.ui.layout.*
+import androidx.ui.layout.Column
+import androidx.ui.layout.LayoutPadding
+import androidx.ui.layout.LayoutWidth
 import androidx.ui.material.Button
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
@@ -32,22 +34,17 @@ class MainFragment : Fragment(R.layout.empty_fragment) {
         MaterialTheme {
             Column {
                 TopAppBar(title = { Text(text = "Main") })
-                FlexColumn(
-                    modifier = Spacing(top = 40.dp, left = 16.dp, right = 16.dp),
-                    crossAxisSize = SizeMode.Expand,
-                    crossAxisAlignment = CrossAxisAlignment.Stretch,
-                    mainAxisAlignment = MainAxisAlignment.Center
+                Column(
+                    modifier = LayoutPadding(top = 40.dp, left = 16.dp, right = 16.dp)
                 ) {
-                    inflexible {
-                        MainButton(text = "a") {
-                            findNavController().navigate(
-                                MainFragmentDirections.actionMainFragmentToMvvmFragment()
-                            )
-                        }
-                        MainButton(text = "b") {
-                        }
-                        MainButton(text = "c") {
-                        }
+                    MainButton(text = "MVVM") {
+                        findNavController().navigate(
+                            MainFragmentDirections.actionMainFragmentToMvvmFragment()
+                        )
+                    }
+                    MainButton(text = "b") {
+                    }
+                    MainButton(text = "c") {
                     }
                 }
             }
@@ -58,7 +55,7 @@ class MainFragment : Fragment(R.layout.empty_fragment) {
     private fun MainButton(text: String, onClick: () -> Unit) {
         Button(
             text = text,
-            modifier = Spacing(bottom = 16.dp),
+            modifier = LayoutPadding(bottom = 16.dp) + LayoutWidth.Fill,
             onClick = onClick
         )
     }
