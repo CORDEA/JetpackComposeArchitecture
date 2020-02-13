@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.compose.Composable
 import androidx.fragment.app.Fragment
 import androidx.ui.core.Text
-import androidx.ui.core.dp
 import androidx.ui.core.setContent
 import androidx.ui.layout.*
 import androidx.ui.material.Button
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.TopAppBar
 import androidx.ui.tooling.preview.Preview
+import androidx.ui.unit.dp
 
 class MainFragment : Fragment(R.layout.empty_fragment) {
     override fun onCreateView(
@@ -33,7 +33,7 @@ class MainFragment : Fragment(R.layout.empty_fragment) {
                 TopAppBar(title = { Text(text = "Main") })
                 FlexColumn(
                     modifier = Spacing(top = 40.dp, left = 16.dp, right = 16.dp),
-                    crossAxisSize = LayoutSize.Expand,
+                    crossAxisSize = SizeMode.Expand,
                     crossAxisAlignment = CrossAxisAlignment.Stretch,
                     mainAxisAlignment = MainAxisAlignment.Center
                 ) {
