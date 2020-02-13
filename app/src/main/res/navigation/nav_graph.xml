@@ -7,5 +7,13 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="jp.cordea.jetpackcomposearchitecture.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_mvvmFragment"
+            app:destination="@id/mvvmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mvvmFragment"
+        android:name="jp.cordea.jetpackcomposearchitecture.MvvmFragment"
+        android:label="MvvmFragment" />
 </navigation>
