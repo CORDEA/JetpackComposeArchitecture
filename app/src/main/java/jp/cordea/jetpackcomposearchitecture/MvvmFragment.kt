@@ -17,8 +17,10 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MvvmFragment : Fragment(R.layout.empty_fragment) {
+    private val viewModel by viewModel<MvvmViewModel>()
     private val state = MvvmState()
 
     override fun onCreateView(
