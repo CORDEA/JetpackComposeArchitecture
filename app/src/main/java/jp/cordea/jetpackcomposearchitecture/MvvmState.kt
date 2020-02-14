@@ -7,6 +7,7 @@ import jp.cordea.jetpackcomposearchitecture.response.Questions
 class MvvmState(var items: List<MvvmListItemModel> = emptyList())
 
 class MvvmListItemModel(
+    val link: String,
     val vote: String,
     val title: String,
     val name: String
@@ -15,6 +16,7 @@ class MvvmListItemModel(
         fun from(questions: Questions) =
             questions.items.map {
                 MvvmListItemModel(
+                    it.link,
                     it.score.toString(),
                     it.title,
                     it.owner.displayName

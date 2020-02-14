@@ -1,5 +1,7 @@
 package jp.cordea.jetpackcomposearchitecture
 
+import android.net.Uri
+import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,8 +28,14 @@ class MvvmViewModel(
         liveData
     }
 
+    val onUriOpen = MutableLiveData<Uri>()
+
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
+    }
+
+    fun clickedItem(link: String) {
+        onUriOpen.value = link.toUri()
     }
 }
