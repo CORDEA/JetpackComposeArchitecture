@@ -15,7 +15,7 @@ class MvvmListItemModel(
         fun from(questions: Questions) =
             questions.items.map {
                 MvvmListItemModel(
-                    (it.upVoteCount - it.downVoteCount).toString(),
+                    it.score.toString(),
                     it.title,
                     it.owner.displayName
                 )
