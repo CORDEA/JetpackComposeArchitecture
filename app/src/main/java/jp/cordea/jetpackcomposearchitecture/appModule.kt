@@ -1,5 +1,7 @@
 package jp.cordea.jetpackcomposearchitecture
 
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -12,7 +14,13 @@ private const val BASE_URL = "https://api.stackexchange.com"
 val appModule = module {
     single {
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(
+                MoshiConverterFactory.create(
+                    Moshi.Builder()
+                        .add(KotlinJsonAdapterFactory())
+                        .build()
+                )
+            )
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .baseUrl(BASE_URL)
             .client(
