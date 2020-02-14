@@ -38,4 +38,7 @@ class MvvmViewModel(
     fun clickedItem(link: String) {
         onUriOpen.value = link.toUri()
     }
+
+    fun clickedFab() {
+    }
 }

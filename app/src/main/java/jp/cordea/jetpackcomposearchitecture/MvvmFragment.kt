@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.compose.Composable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.ui.core.Modifier
 import androidx.ui.core.Text
 import androidx.ui.core.setContent
 import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.*
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.TopAppBar
+import androidx.ui.material.*
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontWeight
@@ -51,6 +52,9 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                         state.items.forEach { Item(it) }
                     }
                 }
+            }
+            FloatingActionButton(modifier = LayoutAlign.BottomRight + LayoutPadding(16.dp)) {
+                viewModel.clickedFab()
             }
         }
     }
