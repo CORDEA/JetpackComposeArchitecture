@@ -48,6 +48,15 @@ class MvvmViewModel(
 
     }
 
+    fun clickedRefreshButton() {
+        fetchItems()
+            .subscribe({
+                items.value = it
+            }, {
+            })
+            .addTo(compositeDisposable)
+    }
+
     private fun fetchItems(): Single<List<MvvmListItemModel>> {
         onLoadingStateChange.value = MvvmLoadingState.LOADING
         return repository.find("mvvm")

@@ -112,7 +112,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
             Button(
                 modifier = LayoutPadding(16.dp) + LayoutAlign.CenterHorizontally,
                 text = "Refresh",
-                onClick = {}
+                onClick = { viewModel.clickedRefreshButton() }
             )
         }
     }
