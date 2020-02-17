@@ -98,7 +98,13 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                                     ) {
                                         DrawVector(
                                             alignment = Alignment.Center,
-                                            vectorImage = vectorResource(id = R.drawable.ic_baseline_insert_emoticon_24)
+                                            vectorImage = vectorResource(
+                                                id = if (model.isChecked) {
+                                                    R.drawable.ic_baseline_check_24
+                                                } else {
+                                                    R.drawable.ic_baseline_add_24
+                                                }
+                                            )
                                         )
                                     }
                                 }
@@ -116,9 +122,9 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
         View(
             MvvmState(
                 listOf(
-                    MvvmListItemModel("", "1", "title", "name"),
-                    MvvmListItemModel("", "2", "title", "name"),
-                    MvvmListItemModel("", "3", "title", "name")
+                    MvvmListItemModel(0L, "", "1", "title", "name"),
+                    MvvmListItemModel(0L, "", "2", "title", "name"),
+                    MvvmListItemModel(0L, "", "3", "title", "name")
                 )
             )
         )

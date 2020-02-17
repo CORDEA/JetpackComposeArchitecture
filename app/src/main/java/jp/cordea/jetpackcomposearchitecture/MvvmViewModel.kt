@@ -29,7 +29,6 @@ class MvvmViewModel(
     val onUriOpen = MutableLiveData<Uri>()
 
     private val compositeDisposable = CompositeDisposable()
-    private val favorites = mutableListOf<Long>()
 
     override fun onCleared() {
         super.onCleared()
@@ -41,11 +40,14 @@ class MvvmViewModel(
     }
 
     fun clickedIcon(id: Long) {
-        if (favorites.contains(id)) {
-            favorites.remove(id)
+        val items = items.value!!
+        val item = items.first { it.id == id }
+        if (item.isChecked) {
+            item.uncheck()
         } else {
-            favorites.add(id)
+            item.check()
         }
+        this.items.value = items
     }
 
     fun clickedFab() {

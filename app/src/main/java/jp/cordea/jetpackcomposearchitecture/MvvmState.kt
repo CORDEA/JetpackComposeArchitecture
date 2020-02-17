@@ -25,4 +25,15 @@ class MvvmListItemModel(
                 )
             }
     }
+
+    var isChecked = false
+        private set
+
+    fun check() {
+        isChecked = true
+    }
+
+    fun uncheck() {
+        isChecked = false
+    }
 }
