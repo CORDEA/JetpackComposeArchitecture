@@ -90,7 +90,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                                 )
                             }
                             Ripple(bounded = false) {
-                                Clickable(onClick = { }) {
+                                Clickable(onClick = { viewModel.clickedIcon(model.id) }) {
                                     Container(
                                         width = 40.dp,
                                         height = 40.dp,

@@ -12,8 +12,6 @@ import io.reactivex.schedulers.Schedulers
 class MvvmViewModel(
     private val repository: QuestionRepository
 ) : ViewModel() {
-    private val compositeDisposable = CompositeDisposable()
-
     val items by lazy {
         val liveData = MutableLiveData<List<MvvmListItemModel>>()
         repository.find("mvvm")
@@ -30,6 +28,9 @@ class MvvmViewModel(
 
     val onUriOpen = MutableLiveData<Uri>()
 
+    private val compositeDisposable = CompositeDisposable()
+    private val favorites = mutableListOf<Long>()
+
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
@@ -37,6 +38,14 @@ class MvvmViewModel(
 
     fun clickedItem(link: String) {
         onUriOpen.value = link.toUri()
+    }
+
+    fun clickedIcon(id: Long) {
+        if (favorites.contains(id)) {
+            favorites.remove(id)
+        } else {
+            favorites.add(id)
+        }
     }
 
     fun clickedFab() {
