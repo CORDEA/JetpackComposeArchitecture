@@ -38,7 +38,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
     ): View {
         val view = super.onCreateView(inflater, container, savedInstanceState)
         (view as ViewGroup).setContent { View(state) }
-        viewModel.items.observe(viewLifecycleOwner, Observer { state.items = it })
+        viewModel.items.observe(viewLifecycleOwner, Observer { state.items = it.toState() })
         viewModel.onUriOpen.observe(viewLifecycleOwner, Observer {
             startActivity(Intent(Intent.ACTION_VIEW, it))
         })
@@ -67,7 +67,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
     }
 
     @Composable
-    private fun Item(model: MvvmListItemModel) {
+    private fun Item(model: MvvmListItemState) {
         Ripple(bounded = true) {
             Clickable(onClick = { viewModel.clickedItem(model.link) }) {
                 Container(padding = EdgeInsets(16.dp)) {
@@ -102,7 +102,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
     }
 
     @Composable
-    private fun StackScope.Icon(model: MvvmListItemModel) {
+    private fun StackScope.Icon(model: MvvmListItemState) {
         Ripple(bounded = false) {
             Clickable(onClick = { viewModel.clickedIcon(model.id) }) {
                 if (model.isChecked) {
@@ -142,9 +142,9 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
         View(
             MvvmState(
                 listOf(
-                    MvvmListItemModel(0L, "", "1", "title", "name"),
-                    MvvmListItemModel(0L, "", "2", "title", "name"),
-                    MvvmListItemModel(0L, "", "3", "title", "name")
+                    MvvmListItemState(0L, "", "1", "title", "name"),
+                    MvvmListItemState(0L, "", "2", "title", "name"),
+                    MvvmListItemState(0L, "", "3", "title", "name")
                 )
             )
         )

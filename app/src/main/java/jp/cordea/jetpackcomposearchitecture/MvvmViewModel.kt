@@ -15,7 +15,7 @@ class MvvmViewModel(
     val items by lazy {
         val liveData = MutableLiveData<List<MvvmListItemModel>>()
         repository.find("mvvm")
-            .map { MvvmListItemModel.from(it) }
+            .map { MvvmListItemModelImpl.from(it) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
