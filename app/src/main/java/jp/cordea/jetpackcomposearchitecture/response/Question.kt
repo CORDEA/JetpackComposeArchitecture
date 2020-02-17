@@ -14,7 +14,7 @@ class Question(
     val score: Int,
     @Json(name = "last_activity_date") val lastActivityDate: Long,
     @Json(name = "creation_date") val creationDate: Long,
-    @Json(name = "question_id") val questionId: Long,
+    @Json(name = "question_id") val questionId: Id,
     val link: String,
     val title: String
 )

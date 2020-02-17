@@ -1,9 +1,10 @@
 package jp.cordea.jetpackcomposearchitecture
 
+import jp.cordea.jetpackcomposearchitecture.response.Id
 import jp.cordea.jetpackcomposearchitecture.response.Questions
 
 interface MvvmListItemModel {
-    val id: Long
+    val id: Id
     val link: String
     val vote: String
     val title: String
@@ -11,7 +12,7 @@ interface MvvmListItemModel {
 }
 
 class MvvmListItemModelImpl(
-    override val id: Long,
+    override val id: Id,
     override val link: String,
     override val vote: String,
     override val title: String,

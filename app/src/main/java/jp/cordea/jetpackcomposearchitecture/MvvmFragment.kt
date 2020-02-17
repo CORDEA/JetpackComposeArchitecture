@@ -25,6 +25,7 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
+import jp.cordea.jetpackcomposearchitecture.response.Id
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MvvmFragment : Fragment(R.layout.empty_fragment) {
@@ -142,9 +143,9 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
         View(
             MvvmState(
                 listOf(
-                    MvvmListItemState(0L, "", "1", "title", "name"),
-                    MvvmListItemState(0L, "", "2", "title", "name"),
-                    MvvmListItemState(0L, "", "3", "title", "name")
+                    MvvmListItemState(Id(0L), "", "1", "title", "name"),
+                    MvvmListItemState(Id(0L), "", "2", "title", "name"),
+                    MvvmListItemState(Id(0L), "", "3", "title", "name")
                 )
             )
         )

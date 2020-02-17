@@ -8,6 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import jp.cordea.jetpackcomposearchitecture.response.Id
 
 class MvvmViewModel(
     private val repository: QuestionRepository
@@ -27,7 +28,7 @@ class MvvmViewModel(
     }
 
     val onUriOpen = MutableLiveData<Uri>()
-    val onCheckedStateUpdate = MutableLiveData<Long>()
+    val onCheckedStateUpdate = MutableLiveData<Id>()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -40,7 +41,7 @@ class MvvmViewModel(
         onUriOpen.value = link.toUri()
     }
 
-    fun clickedIcon(id: Long) {
+    fun clickedIcon(id: Id) {
         onCheckedStateUpdate.value = id
     }
 
