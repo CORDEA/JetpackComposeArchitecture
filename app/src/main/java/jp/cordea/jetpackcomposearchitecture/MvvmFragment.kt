@@ -42,6 +42,10 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
         viewModel.onUriOpen.observe(viewLifecycleOwner, Observer {
             startActivity(Intent(Intent.ACTION_VIEW, it))
         })
+        viewModel.onCheckedStateUpdate.observe(viewLifecycleOwner, Observer { id ->
+            val item = state.items.first { it.id == id }
+            item.isChecked = !item.isChecked
+        })
         return view
     }
 
@@ -89,27 +93,43 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                                     modifier = LayoutPadding(top = 4.dp)
                                 )
                             }
-                            Ripple(bounded = false) {
-                                Clickable(onClick = { viewModel.clickedIcon(model.id) }) {
-                                    Container(
-                                        width = 40.dp,
-                                        height = 40.dp,
-                                        modifier = LayoutGravity.CenterRight
-                                    ) {
-                                        DrawVector(
-                                            alignment = Alignment.Center,
-                                            vectorImage = vectorResource(
-                                                id = if (model.isChecked) {
-                                                    R.drawable.ic_baseline_check_24
-                                                } else {
-                                                    R.drawable.ic_baseline_add_24
-                                                }
-                                            )
-                                        )
-                                    }
-                                }
-                            }
+                            Icon(model)
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun StackScope.Icon(model: MvvmListItemModel) {
+        Ripple(bounded = false) {
+            Clickable(onClick = { viewModel.clickedIcon(model.id) }) {
+                if (model.isChecked) {
+                    Container(
+                        width = 40.dp,
+                        height = 40.dp,
+                        modifier = LayoutGravity.CenterRight
+                    ) {
+                        DrawVector(
+                            alignment = Alignment.Center,
+                            vectorImage = vectorResource(
+                                id = R.drawable.ic_baseline_check_24
+                            )
+                        )
+                    }
+                } else {
+                    Container(
+                        width = 40.dp,
+                        height = 40.dp,
+                        modifier = LayoutGravity.CenterRight
+                    ) {
+                        DrawVector(
+                            alignment = Alignment.Center,
+                            vectorImage = vectorResource(
+                                id = R.drawable.ic_baseline_add_24
+                            )
+                        )
                     }
                 }
             }

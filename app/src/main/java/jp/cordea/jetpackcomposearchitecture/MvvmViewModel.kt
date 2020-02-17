@@ -27,6 +27,7 @@ class MvvmViewModel(
     }
 
     val onUriOpen = MutableLiveData<Uri>()
+    val onCheckedStateUpdate = MutableLiveData<Long>()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -40,14 +41,7 @@ class MvvmViewModel(
     }
 
     fun clickedIcon(id: Long) {
-        val items = items.value!!
-        val item = items.first { it.id == id }
-        if (item.isChecked) {
-            item.uncheck()
-        } else {
-            item.check()
-        }
-        this.items.value = items
+        onCheckedStateUpdate.value = id
     }
 
     fun clickedFab() {

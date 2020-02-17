@@ -6,12 +6,14 @@ import jp.cordea.jetpackcomposearchitecture.response.Questions
 @Model
 class MvvmState(var items: List<MvvmListItemModel> = emptyList())
 
+@Model
 class MvvmListItemModel(
     val id: Long,
     val link: String,
     val vote: String,
     val title: String,
-    val name: String
+    val name: String,
+    var isChecked: Boolean = false
 ) {
     companion object {
         fun from(questions: Questions) =
@@ -24,16 +26,5 @@ class MvvmListItemModel(
                     it.owner.displayName
                 )
             }
-    }
-
-    var isChecked = false
-        private set
-
-    fun check() {
-        isChecked = true
-    }
-
-    fun uncheck() {
-        isChecked = false
     }
 }
