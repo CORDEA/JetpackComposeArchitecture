@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -15,10 +16,7 @@ class MvvmViewModel(
 ) : ViewModel() {
     val items by lazy {
         val liveData = MutableLiveData<List<MvvmListItemModel>>()
-        repository.find("mvvm")
-            .map { MvvmListItemModelImpl.from(it) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        fetchItems()
             .subscribe({
                 liveData.value = it
             }, {
@@ -28,6 +26,7 @@ class MvvmViewModel(
     }
 
     val onUriOpen = MutableLiveData<Uri>()
+    val onLoadingStateChange = MutableLiveData<MvvmLoadingState>()
     val onCheckedStateUpdate = MutableLiveData<Id>()
 
     private val compositeDisposable = CompositeDisposable()
@@ -46,5 +45,16 @@ class MvvmViewModel(
     }
 
     fun clickedFab() {
+
+    }
+
+    private fun fetchItems(): Single<List<MvvmListItemModel>> {
+        onLoadingStateChange.value = MvvmLoadingState.LOADING
+        return repository.find("mvvm")
+            .map { MvvmListItemModelImpl.from(it) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSuccess { onLoadingStateChange.value = MvvmLoadingState.OK }
+            .doOnError { onLoadingStateChange.value = MvvmLoadingState.ERROR }
     }
 }

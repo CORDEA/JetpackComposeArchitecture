@@ -41,6 +41,9 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
         viewModel.onUriOpen.observe(viewLifecycleOwner, Observer {
             startActivity(Intent(Intent.ACTION_VIEW, it))
         })
+        viewModel.onLoadingStateChange.observe(viewLifecycleOwner, Observer {
+            state.loadingState = it
+        })
         viewModel.onCheckedStateUpdate.observe(viewLifecycleOwner, Observer { id ->
             val item = state.items.first { it.id == id }
             item.isChecked = !item.isChecked
@@ -53,6 +56,11 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
         MaterialTheme {
             Column {
                 TopAppBar(title = { Text(text = "MVVM") })
+                when (state.loadingState) {
+                    MvvmLoadingState.LOADING -> Loading()
+                    MvvmLoadingState.OK -> Content(state = state)
+                    MvvmLoadingState.ERROR -> Error()
+                }
             }
             FloatingActionButton(
                 modifier = LayoutAlign.BottomRight + LayoutPadding(16.dp),
@@ -188,6 +196,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
     private fun DefaultPreview() {
         View(
             MvvmState(
+                MvvmLoadingState.OK,
                 listOf(
                     MvvmListItemState(Id(0L), "", "1", "title", "name"),
                     MvvmListItemState(Id(0L), "", "2", "title", "name"),

@@ -4,7 +4,10 @@ import androidx.compose.Model
 import jp.cordea.jetpackcomposearchitecture.response.Id
 
 @Model
-class MvvmState(var items: List<MvvmListItemState> = emptyList())
+class MvvmState(
+    var loadingState: MvvmLoadingState = MvvmLoadingState.LOADING,
+    var items: List<MvvmListItemState> = emptyList()
+)
 
 @Model
 class MvvmListItemState(
@@ -15,3 +18,9 @@ class MvvmListItemState(
     override val name: String,
     var isChecked: Boolean = false
 ) : MvvmListItemModel
+
+enum class MvvmLoadingState {
+    LOADING,
+    OK,
+    ERROR
+}
