@@ -61,8 +61,11 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                     }
                 }
             }
-            FloatingActionButton(modifier = LayoutAlign.BottomRight + LayoutPadding(16.dp)) {
-                viewModel.clickedFab()
+            FloatingActionButton(
+                modifier = LayoutAlign.BottomRight + LayoutPadding(16.dp),
+                onClick = { viewModel.clickedFab() }
+            ) {
+                DrawVector(vectorImage = vectorResource(id = R.drawable.ic_baseline_check_white_24))
             }
         }
     }
