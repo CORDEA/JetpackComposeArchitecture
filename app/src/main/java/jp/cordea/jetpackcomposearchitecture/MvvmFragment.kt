@@ -15,9 +15,7 @@ import androidx.ui.foundation.Clickable
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.graphics.vector.DrawVector
 import androidx.ui.layout.*
-import androidx.ui.material.FloatingActionButton
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.TopAppBar
+import androidx.ui.material.*
 import androidx.ui.material.ripple.Ripple
 import androidx.ui.res.vectorResource
 import androidx.ui.text.TextStyle
@@ -55,11 +53,6 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
         MaterialTheme {
             Column {
                 TopAppBar(title = { Text(text = "MVVM") })
-                VerticalScroller {
-                    Column {
-                        state.items.forEach { Item(it) }
-                    }
-                }
             }
             FloatingActionButton(
                 modifier = LayoutAlign.BottomRight + LayoutPadding(16.dp),
@@ -67,6 +60,52 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
             ) {
                 DrawVector(vectorImage = vectorResource(id = R.drawable.ic_baseline_check_white_24))
             }
+        }
+    }
+
+    @Composable
+    private fun Content(state: MvvmState) {
+        VerticalScroller {
+            Column {
+                state.items.forEach { Item(it) }
+            }
+        }
+    }
+
+    @Composable
+    private fun Loading() {
+        Container(modifier = LayoutAlign.Center) {
+            CircularProgressIndicator()
+        }
+    }
+
+    @Composable
+    private fun Error() {
+        Column(
+            modifier = LayoutSize.Fill,
+            arrangement = Arrangement.Center
+        ) {
+            Container(
+                modifier = LayoutAlign.CenterHorizontally,
+                width = 56.dp,
+                height = 56.dp
+            ) {
+                DrawVector(
+                    alignment = Alignment.Center,
+                    vectorImage = vectorResource(
+                        id = R.drawable.ic_baseline_error_56
+                    )
+                )
+            }
+            Text(
+                modifier = LayoutPadding(top = 16.dp) + LayoutAlign.CenterHorizontally,
+                text = "Failed to fetch questions."
+            )
+            Button(
+                modifier = LayoutPadding(16.dp) + LayoutAlign.CenterHorizontally,
+                text = "Refresh",
+                onClick = {}
+            )
         }
     }
 
