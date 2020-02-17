@@ -72,7 +72,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                             modifier = LayoutGravity.Center + LayoutPadding(right = 16.dp),
                             text = model.vote
                         )
-                        Stack {
+                        Stack(modifier = LayoutWidth.Fill) {
                             Column(
                                 modifier = LayoutGravity.CenterLeft + LayoutPadding(right = 56.dp)
                             ) {
