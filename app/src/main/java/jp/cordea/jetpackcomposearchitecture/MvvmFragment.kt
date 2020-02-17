@@ -89,15 +89,19 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                                     modifier = LayoutPadding(top = 4.dp)
                                 )
                             }
-                            Container(
-                                width = 40.dp,
-                                height = 40.dp,
-                                modifier = LayoutGravity.CenterRight
-                            ) {
-                                DrawVector(
-                                    alignment = Alignment.Center,
-                                    vectorImage = vectorResource(id = R.drawable.ic_baseline_insert_emoticon_24)
-                                )
+                            Ripple(bounded = false) {
+                                Clickable(onClick = { }) {
+                                    Container(
+                                        width = 40.dp,
+                                        height = 40.dp,
+                                        modifier = LayoutGravity.CenterRight
+                                    ) {
+                                        DrawVector(
+                                            alignment = Alignment.Center,
+                                            vectorImage = vectorResource(id = R.drawable.ic_baseline_insert_emoticon_24)
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
