@@ -94,7 +94,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                                     modifier = LayoutPadding(top = 4.dp)
                                 )
                             }
-                            Icon(model)
+                            ClickableIcon(model)
                         }
                     }
                 }
@@ -103,15 +103,11 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
     }
 
     @Composable
-    private fun StackScope.Icon(model: MvvmListItemState) {
+    private fun StackScope.ClickableIcon(state: MvvmListItemState) {
         Ripple(bounded = false) {
-            Clickable(onClick = { viewModel.clickedIcon(model.id) }) {
-                if (model.isChecked) {
-                    Container(
-                        width = 40.dp,
-                        height = 40.dp,
-                        modifier = LayoutGravity.CenterRight
-                    ) {
+            Clickable(onClick = { viewModel.clickedIcon(state.id) }) {
+                if (state.isChecked) {
+                    IconContainer {
                         DrawVector(
                             alignment = Alignment.Center,
                             vectorImage = vectorResource(
@@ -120,11 +116,7 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                         )
                     }
                 } else {
-                    Container(
-                        width = 40.dp,
-                        height = 40.dp,
-                        modifier = LayoutGravity.CenterRight
-                    ) {
+                    IconContainer {
                         DrawVector(
                             alignment = Alignment.Center,
                             vectorImage = vectorResource(
@@ -135,6 +127,18 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                 }
             }
         }
+    }
+
+    @Composable
+    private fun StackScope.IconContainer(
+        @Suppress("RemoveEmptyParenthesesFromAnnotationEntry") children: @Composable() () -> Unit
+    ) {
+        Container(
+            width = 40.dp,
+            height = 40.dp,
+            modifier = LayoutGravity.CenterRight,
+            children = children
+        )
     }
 
     @Preview
