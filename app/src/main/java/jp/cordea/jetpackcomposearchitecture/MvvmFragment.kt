@@ -72,26 +72,33 @@ class MvvmFragment : Fragment(R.layout.empty_fragment) {
                             modifier = LayoutGravity.Center + LayoutPadding(right = 16.dp),
                             text = model.vote
                         )
-                        Column {
-                            Text(
-                                text = model.title,
-                                style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                            )
-                            Text(
-                                text = model.name,
-                                style = TextStyle(fontSize = 12.sp),
-                                modifier = LayoutPadding(top = 4.dp)
-                            )
-                        }
-                        Container(
-                            modifier = LayoutPadding(right = 16.dp),
-                            width = 40.dp,
-                            height = 40.dp
-                        ) {
-                            DrawVector(
-                                alignment = Alignment.Center,
-                                vectorImage = vectorResource(id = R.drawable.ic_baseline_insert_emoticon_24)
-                            )
+                        Stack {
+                            Column(
+                                modifier = LayoutGravity.CenterLeft + LayoutPadding(right = 56.dp)
+                            ) {
+                                Text(
+                                    text = model.title,
+                                    style = TextStyle(
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                                Text(
+                                    text = model.name,
+                                    style = TextStyle(fontSize = 12.sp),
+                                    modifier = LayoutPadding(top = 4.dp)
+                                )
+                            }
+                            Container(
+                                width = 40.dp,
+                                height = 40.dp,
+                                modifier = LayoutGravity.CenterRight
+                            ) {
+                                DrawVector(
+                                    alignment = Alignment.Center,
+                                    vectorImage = vectorResource(id = R.drawable.ic_baseline_insert_emoticon_24)
+                                )
+                            }
                         }
                     }
                 }
